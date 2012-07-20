@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>arara by cereda</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">arara</h1>
+        <p class="header">The cool TeX automation tool</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/cereda/arara/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/cereda/arara/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/cereda/arara">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/cereda">cereda</a></p>
+
+
+      </header>
+      <section>
+        <h1>Introduction</h1>
+
+<p>Welcome to <code>arara</code>! This chapter is a quick introduction to what you can expect from <code>arara</code>. Don't be afraid, it will be easy to digest, I promise.</p>
+
+<h2>What is arara?</h2>
+
+<p>Good question. I've been asking it myself for a quite long time. Since I have to provide an official definition for <code>arara</code> - I'm the author, the one to blame - I'd go with something along these lines:</p>
+
+<p><code>arara</code> is a TeX automation tool. But maybe not in the traditional sense, such as existing tools like <code>latexmk</code> and <code>rubber</code>. Think of <code>arara</code> as a personal assistant. It is as powerful as you want it to be. <code>arara</code> doesn't provide solutions out of the box, but it gives you subsidies to enhance your TeX experience.</p>
+
+<p>Well, that was a shot in the dark. I'm sorry for this crude definition, but the truth is: <code>arara</code> is generic enough to rely on different schemes. <code>arara</code> will execute what you tell it to execute. How will <code>arara</code> do this? That's the problem: you are in control, so it depends on you.</p>
+
+<p>First things first. <em>Arara</em> is the Brazilian name of a macaw bird. Have you ever watched <em>Rio: the movie</em>? The protagonist is a blue arara, or as we say in Brazil, a cute <em>ararinha-azul</em>. The word <em>arara</em> comes from the Tupian word <em>a'rara</em>, which means <em>big bird</em>.</p>
+
+<p>The parrot belongs to the same family of the arara. Have you ever talked to a parrot? They are able to learn and reproduce words. Maybe I could establish an analogy between <code>arara</code> - the software - and a parrot. Let's see how it works.</p>
+
+<p>How do you make a parrot talk? You need to teach it. The very same way happens with <code>arara</code>: the software will execute what you tell it to execute. How will <code>arara</code> do this? Easy: you need to teach it. Let's see an example for a better understanding. Consider the following LaTeX code, <code>mydoc.tex</code>:</p>
+
+<div class="highlight">
+<pre><span class="k">\documentclass</span><span class="nb">{</span>article<span class="nb">}</span>
+
+<span class="k">\begin</span><span class="nb">{</span>document<span class="nb">}</span>
+
+Hello world.
+<span class="k">\end</span><span class="nb">{</span>document<span class="nb">}</span>
+</pre>
+</div>
+
+
+<p>How would you compile <code>mydoc.tex</code> in <code>rubber</code>, for instance? It's quite easy, a simple <code>rubber --pdf mydoc</code> would do the trick. Now, if you try <code>arara mydoc</code>, I'm afraid nothing will be generated. Why? Isn't <code>arara</code> supposed to be a TeX automation tool? Well, <code>arara</code> doesn't know what to do with your file. You need to tell it. For now, please understand that you need to provide the batteries for <code>arara</code> to run - bad analogy perhaps, but that's true. Don't worry, we will come back to this example later and see how to make <code>arara</code> produce the desired output.</p>
+
+<p>Long story short: you are in control of your documents. <code>arara</code> won't do anything unless you teach it how to do a task and explicitly tell it to execute the task. Introducing the <code>arara</code> terminology:</p>
+
+<ul>
+<li>
+<strong>How can I teach <code>arara</code> to do a task?</strong> You need to define <code>arara</code> rules.</li>
+<li>
+<strong>How can I tell <code>arara</code> to execute a task?</strong> You need to use <code>arara</code> directives.</li>
+</ul><p>That's probably one of the major differences of <code>arara</code> from other automation tools. With <code>latexmk</code> and <code>rubber</code>, for example, you have great features out of the box, ready for you to use and abuse - batteries included. <code>arara</code> takes a minimalist approach and gives you the simplicity of doing exactly what you want it to do. Nothing more, nothing less.</p>
+
+<h2>Features</h2>
+
+<p>There's nothing so special with <code>arara</code>. It does exactly what you tell it to do. On the other hand, one of the features I like in <code>arara</code> is the ability to write rules in a human-readable format called YAML. YAML is actually a recursive acronym for <em>YAML Ain't Markup Language</em>, and it's known as a human friendly data serialization standard for all programming languages. I think this format is very suitable to write rules - Ruby uses it a lot. You don't need to rely on other formats. Actually, you can write a compiled rule, but I'm almost sure you will never need one.</p>
+
+<p>I like to be in control of my TeX documents - including running commands many times my heart desires and in the order I want. I can create a complex workflow and <code>arara</code> will handle it for me - again, as long as I have the proper rules.</p>
+
+<p>Another feature worth mentioning is the fact that <code>arara</code> is platform independent. I wrote it in Java, so <code>arara</code> runs on top of a Java virtual machine, available on all the major operating systems - in some cases, you might need to install the proper virtual machine. I tried to keep my code and libraries compatible with older virtual machines - currently, Java 5, 6, 7, OpenJDK 6 and 7 are supported. But beware, if you write system-specific rules, you will need to adapt them when porting to a different operating system - actually that's not accurate, we will see later that we can add conditionals to our rule based on the underlying operating system.</p>
+
+<p>You can easily integrate <code>arara</code> with TeXworks, an environment for authoring TeX documents shipped with both TeX Live and MiKTeX. We will cover the integration of <code>arara</code> and TeXworks later on.</p>
+
+<p><code>arara</code> is an open source project, so you can get the code and study it. Don't worry if you don't know Java, the code is well documented - there are 1642 lines of comments in the source code. The project is hosted on <a href="http://github.com/cereda/arara">GitHub</a>. You can fork the project, send pull requests or submit issues.</p>
+
+<h2>Common cases</h2>
+
+<p><code>arara</code> can be used in complex workflows, like theses and books. You can tell <code>arara</code> to compile the document, generate indices and apply styles, remove temporary files, compile other <code>.tex</code> documents, create glossaries, call <code>pdfcrop</code>, move files, run METAPOST or METAFONT, and much more. It's up to you.</p>
+
+<p>I wrote an <a href="http://latex-community.org/know-how/435-gnuplot-arara">article</a> to a contest organized by Stefan Kottwitz and the LaTeX community about how to integrate <code>gnuplot</code> and <code>arara</code>. It might be worth a read.</p>
+
+<p>The next code contains the <code>arara</code> workflow I used for another article I recently wrote. Note that the first call to <code>pdflatex</code> creates the <code>.aux</code> file, then <code>bibtex</code> will extract the cited publications. The next calls to <code>pdflatex</code> will insert and refine the references.</p>
+
+<div class="highlight">
+<pre><span class="c">% arara: pdflatex</span>
+<span class="c">% arara: bibtex</span>
+<span class="c">% arara: pdflatex</span>
+<span class="c">% arara: pdflatex</span>
+<span class="k">\documentclass</span><span class="na">[journal]</span><span class="nb">{</span>IEEEtran<span class="nb">}</span>
+...
+</pre>
+</div>
+
+
+<p>The next code contains another <code>arara</code> workflow I used for a manual. I had to use a package that required shell escape, so the calls to <code>pdflatex</code> had to enable it. Also, I had an index with a custom formatting, then <code>makeindex</code> was called with the proper style.</p>
+
+<div class="highlight">
+<pre><span class="c">% arara: pdflatex: { shell: yes }</span>
+<span class="c">% arara: makeindex: { style: mystyle }</span>
+<span class="c">% arara: pdflatex: { shell: yes }</span>
+<span class="c">% arara: pdflatex: { shell: yes }</span>
+<span class="k">\documentclass</span><span class="nb">{</span>book<span class="nb">}</span>
+...
+</pre>
+</div>
+
+
+<p>And of course, the <code>arara</code> user manual is also compiled with <code>arara</code>. You can take a look in the source code and check the compilation workflow. By the way, note that I had to use a trick to avoid <code>arara</code> to read the example directives in this manual. As we will see later, <code>arara</code> reads directives everywhere.</p>
+
+<p>Other workflows can be easily created. There can be an arbitrary number of instructions for <code>arara</code> to execute, so feel free to come up with your own workflow. <code>arara</code> will handle it for you. My friend Joseph Wright wrote a great article about <code>arara</code> <a href="http://www.texdev.net/2012/04/24/arara-making-latex-files-your-way/">in his personal blog</a>, it's really worth a read.</p>
+
+<p>I really hope you like my humble contribution to the TeX community. Let <code>arara</code> enhance your TeX experience.</p>
+
+<h2>Trivia</h2>
+
+<p>I explained <em>what</em> the name <em>arara</em> means, but I didn't tell <em>why</em> I chose this name. Well, araras are colorful, noisy, naughty and very funny. Everybody loves araras. So why can't you love a tool with the very same name? And there’s also another motivation of the name <em>arara</em>: the chatroom residents of <a href="http://chat.stackexchange.com/rooms/41">TeX.sx</a> - including myself - are fans of palindromes, especially palindromic numbers. As you can already tell, <em>arara</em> is a palindrome.</p>
+
+<p><code>TODO: next chapters</code></p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><!--<![endif]-->
+		
+  </body>
+</html>
